@@ -1,0 +1,29 @@
+# PDF to CSV/Excel 変換ツール - 必要ライブラリ
+# Python 3.7以上で動作確認済み
+
+# 必須ライブラリ
+openpyxl==3.1.5          # Excelファイルの読み書き
+pandas==2.3.2            # データ操作・CSV出力
+pdfplumber==0.11.7       # PDF読み取り・テーブル抽出
+
+# 依存ライブラリ（自動でインストールされる）
+numpy==2.3.2             # 数値計算（pandasの依存）
+pillow==11.3.0           # 画像処理（pdfplumberの依存）
+et_xmlfile==2.0.0        # XML処理（openpyxlの依存）
+python-dateutil==2.9.0.post0  # 日付処理（pandasの依存）
+pytz==2025.2             # タイムゾーン処理（pandasの依存）
+tzdata==2025.2           # タイムゾーンデータ
+six==1.17.0              # Python2/3互換ライブラリ
+
+# PDF処理関連の依存ライブラリ
+pdfminer.six==20250506   # PDF解析エンジン
+pypdfium2==4.30.0       # PDF処理ライブラリ
+charset-normalizer==3.4.3  # 文字エンコード処理
+cryptography==45.0.7    # 暗号化処理（PDF処理用）
+cffi==1.17.1            # C言語拡張インターフェース
+pycparser==2.22         # Cパーサー（cffiの依存）
+
+# 注意事項:
+# - tkinter は Python 標準ライブラリのため不要
+# - Windows環境で動作確認済み
+# - 仮想環境での使用を強く推奨
