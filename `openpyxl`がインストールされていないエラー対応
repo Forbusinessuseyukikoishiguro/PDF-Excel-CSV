@@ -1,0 +1,194 @@
+`openpyxl`がインストールされていないエラー対応
+
+## 解決方法
+
+### 1. 現在の仮想環境でライブラリをインストール
+
+```powershell
+# 仮想環境が有効になっていることを確認（(venv)が表示されている）
+(venv) PS C:\Users\yukik\Desktop\excel> pip install openpyxl
+
+# 他の必要なライブラリも一緒にインストール
+(venv) PS C:\Users\yukik\Desktop\excel> pip install pandas pdfplumber
+```
+
+### 2. インストール確認
+
+```powershell
+# インストールされたライブラリを確認
+(venv) PS C:\Users\yukik\Desktop\excel> pip list
+
+# openpyxlが含まれているかチェック
+(venv) PS C:\Users\yukik\Desktop\excel> pip show openpyxl
+```
+
+### 3. 再度プログラムを実行
+
+```powershell
+(venv) PS C:\Users\yukik\Desktop\excel> python excel_sheet_deleter_gui.py
+```
+
+## もし上記でも解決しない場合
+
+### A. pipを最新版にアップデート
+
+```powershell
+(venv) PS C:\Users\yukik\Desktop\excel> python -m pip install --upgrade pip
+(venv) PS C:\Users\yukik\Desktop\excel> pip install openpyxl
+```
+
+### B. 仮想環境を再作成
+
+```powershell
+# 仮想環境を無効化
+(venv) PS C:\Users\yukik\Desktop\excel> deactivate
+
+# 古い仮想環境を削除
+PS C:\Users\yukik\Desktop\excel> Remove-Item -Recurse -Force venv
+
+# 新しい仮想環境を作成
+PS C:\Users\yukik\Desktop\excel> python -m venv venv
+
+# 有効化
+PS C:\Users\yukik\Desktop\excel> .\venv\Scripts\Activate.ps1
+
+# ライブラリをインストール
+(venv) PS C:\Users\yukik\Desktop\excel> pip install openpyxl pandas pdfplumber
+```
+
+### C. 一括インストール（推奨）
+
+```powershell
+# 必要なライブラリをまとめてインストール
+(venv) PS C:\Users\yukik\Desktop\excel> pip install openpyxl==3.1.2 pandas==2.0.3 pdfplumber==0.9.0
+```
+
+## 確認用コマンド
+
+インストール後、以下で確認できます：
+
+```powershell
+# Pythonでモジュールが読み込めるかテスト
+(venv) PS C:\Users\yukik\Desktop\excel> python -c "import openpyxl; print('openpyxl正常にインストールされました')"
+(venv) PS C:\Users\yukik\Desktop\excel> python -c "import pandas; print('pandas正常にインストールされました')"
+```
+
+ーーーーーーーーーーーーーーーーーーーー
+`requirements.txt`を使ったライブラリのインストール方法を説明します。
+
+## 1. requirements.txtファイルの作成
+
+まず、`C:\Users\yukik\Desktop\excel`フォルダに`requirements.txt`ファイルを作成します：
+
+**VSCodeで新しいファイルを作成し、以下の内容を保存：**
+
+```text
+pdfplumber==0.9.0
+pandas==2.0.3
+openpyxl==3.1.2
+```
+
+**注意：** `tkinter`は削除しました。これはPythonに標準で含まれているため、個別にインストールする必要がありません。
+
+## 2. 仮想環境でのインストール手順
+
+PowerShellで以下を順番に実行：
+
+```powershell
+# 1. 現在のディレクトリを確認
+PS C:\Users\yukik\Desktop\excel> pwd
+
+# 2. 仮想環境を作成
+PS C:\Users\yukik\Desktop\excel> python -m venv venv
+
+# 3. 実行ポリシー設定（必要な場合）
+PS C:\Users\yukik\Desktop\excel> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# 4. 仮想環境を有効化
+PS C:\Users\yukik\Desktop\excel> .\venv\Scripts\Activate.ps1
+
+# 5. pipを最新版にアップデート
+(venv) PS C:\Users\yukik\Desktop\excel> python -m pip install --upgrade pip
+
+# 6. requirements.txtからライブラリをインストール
+(venv) PS C:\Users\yukik\Desktop\excel> pip install -r requirements.txt
+```
+
+## 3. インストール確認
+
+```powershell
+# インストールされたライブラリを確認
+(venv) PS C:\Users\yukik\Desktop\excel> pip list
+
+# 特定のライブラリのバージョン確認
+(venv) PS C:\Users\yukik\Desktop\excel> pip show pdfplumber
+(venv) PS C:\Users\yukik\Desktop\excel> pip show pandas
+(venv) PS C:\Users\yukik\Desktop\excel> pip show openpyxl
+```
+
+## 4. プログラムの実行
+
+```powershell
+# PDFコンバーターを実行
+(venv) PS C:\Users\yukik\Desktop\excel> python pdf_converter.py
+```
+
+## 5. 個別インストールの場合
+
+requirements.txtを使わずに個別でインストールする場合：
+
+```powershell
+(venv) PS C:\Users\yukik\Desktop\excel> pip install pdfplumber==0.9.0
+(venv) PS C:\Users\yukik\Desktop\excel> pip install pandas==2.0.3
+(venv) PS C:\Users\yukik\Desktop\excel> pip install openpyxl==3.1.2
+```
+
+## 6. エラーが出た場合の対処法
+
+### 6.1 ネットワークエラーの場合
+```powershell
+# タイムアウト時間を延長
+(venv) PS C:\Users\yukik\Desktop\excel> pip install -r requirements.txt --timeout 300
+
+# 別のミラーサーバーを使用
+(venv) PS C:\Users\yukik\Desktop\excel> pip install -r requirements.txt -i https://pypi.org/simple/
+```
+
+### 6.2 権限エラーの場合
+```powershell
+# ユーザーインストール
+(venv) PS C:\Users\yukik\Desktop\excel> pip install -r requirements.txt --user
+```
+
+## 7. 完全なセットアップスクリプト
+
+以下を順番にコピペして実行：
+
+```powershell
+# Step 1: 仮想環境作成
+python -m venv venv
+
+# Step 2: 実行ポリシー設定
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# Step 3: 仮想環境有効化
+.\venv\Scripts\Activate.ps1
+
+# Step 4: pipアップグレード
+python -m pip install --upgrade pip
+
+# Step 5: ライブラリインストール
+pip install pdfplumber==0.9.0 pandas==2.0.3 openpyxl==3.1.2
+
+# Step 6: インストール確認
+pip list
+
+# Step 7: プログラム実行
+python pdf_converter.py
+```
+
+これで必要なライブラリがすべてインストールされ、PDFコンバーターが実行できるようになります！
+
+
+
+この手順でエラーが解決されるはずです。まだエラーが出る場合は、エラーメッセージを教えてください！
