@@ -1,0 +1,72 @@
+PowerShellがエラーメッセージを実行可能なコードとして解釈してしまっています。これを解決しましょう。
+
+## 1. PowerShellをクリアして新しく開始
+
+まず、PowerShellをクリアします：
+
+```powershell
+# 画面をクリア
+Clear-Host
+```
+
+または、VSCodeのターミナルを閉じて新しく開いてください。
+
+## 2. 仮想環境を再度有効化
+
+```powershell
+# 現在のディレクトリに移動
+cd C:\Users\yukik\Desktop\excel
+
+# 仮想環境を有効化
+.\venv\Scripts\Activate.ps1
+```
+
+## 3. openpyxlをインストール
+
+```powershell
+# openpyxlをインストール
+python -m pip install openpyxl
+```
+
+## 4. インストール確認
+
+```powershell
+# インストールされたライブラリを確認
+python -m pip list
+```
+
+## 5. プログラムを実行
+
+```powershell
+# pythonコマンドで実行（pyは使わない）
+python excel_sheet_deleter_gui.py
+```
+
+## もしまだエラーが出る場合の完全リセット
+
+```powershell
+# Step 1: 新しいPowerShellウィンドウを開く
+# VSCode → Terminal → New Terminal
+
+# Step 2: ディレクトリに移動
+cd C:\Users\yukik\Desktop\excel
+
+# Step 3: 仮想環境を有効化
+.\venv\Scripts\Activate.ps1
+
+# Step 4: 必要なライブラリをすべてインストール
+python -m pip install openpyxl pandas pdfplumber
+
+# Step 5: インストール確認
+python -c "import openpyxl; print('Success!')"
+
+# Step 6: プログラム実行
+python excel_sheet_deleter_gui.py
+```
+
+## 重要なポイント
+
+1. **新しいターミナルを使用** - エラーメッセージで混乱している可能性があります
+2. **`python`コマンドのみ使用** - `py`は使わない
+3. **一つずつコマンドを実行** - 複数行を一度にコピペしない
+
